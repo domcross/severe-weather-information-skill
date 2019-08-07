@@ -1,22 +1,76 @@
-name: Severe weather information
+name: Severe Weather Information
 skillMetadata:
   sections:
-    - name: Options << Name of section
+    - name: Options
       fields:
-        - name: internal_python_variable_name
+        - name: service
+          type: select
+          label: Service
+          options: "ARG - Argentina (es)|ARG:es;AUT - Austria (de,en)|AUT;BRA - Brazil (pt)|BRA:pt;BRB - Barbados (en)|BRB:en;CAN - Canada (en,fr)|CAN;CZE - Czech Republic (cs)|CZE:cs;DEU - Germany (de,en)|DEU;DNK - Denmark (en)|DNK:en;ESP - Spain (es)|ESP:es;IDN - Indonesia (id)|IDN:id;KEN - Kenya (en)|KEN:en;KWT - Kuwait (en)|KWT:en;MEX - Mexico (es)|MEX:es;NLD - Netherlands (en,nl,pap)|NLD;NOR - Norway (en,nb,no)|NOR;NZL - New Zealand (en)|NZL:en;PHL - Philippines (en)|PHL:en;ROM - Romania (ro)|ROM:ro;RUS - Russian Federation (en,ru)|RUS;THA - Thailand (th)|THA:th;TZA - Tanzania, United Republic of (en)|TZA:en;USA - United States of America (en)|USA:en"
+          value: "USA:en"
+
+        - name: language
           type: text
-          label: Setting Friendly Display Name
-          value: ""
-          placeholder: demo prompt in the input box
-    - name: Login << Name of another section
-      fields:
-        - type: label
-          label: Just a little bit of extra info for the user to understand following settings
-        - name: username
+          label: Language
+          value: "en"
+          placeholder: "en"
+
+        - name: urgency
+          type: select
+          label: Urgency
+          options: "Immediate|Immediate;Expected|Immediate,Expected;Future|Immediate,Expected,Future"
+          value: "Immediate"
+
+        - name: severity
+          type: select
+          label: Severity
+          options: "Extreme|Extreme;Severe|Extreme,Severe;Moderate|Extreme,Severe,Moderate;Minor|Extreme,Severe,Moderate,Minor"
+          value: "Extreme"
+
+        - name: certainty
+          type: select
+          label: Certainty
+          options: "Observed|Observed;Likely|Observed,Likely;Possible|Observed,Likely,Possible"
+          value: "Observed"
+
+        - name: location_label
+          type: label
+          label: >
+            <p>
+            Filtering by location is highly recommended as weather services might provide lots of warnings for areas far away from your location.
+            "Mycroft device" will use longitude/latitude from the device's configuration.
+            "Area description" is very often the name of a city/county/region - don't forget to enter description in field "Location (description)"
+            "Geo-Code" is dependant on the service, e.g. UGC, Emma-Id or NUTS3 - enter the actual code-value in field "Location (description)" without the Geo-Code name.
+            </p>
+
+        - name: location_filter
+          type: select
+          label: Location (filter)
+          options: "Mycroft device|geoloc;Area description|areadesc;Geo-Code|geocode;None|none"
+          value: "geoloc"
+
+        - name: location_text
           type: text
-          label: Username
+          label: Location (Value)
           value: ""
-        - name: password
-          type: password
-          label: Password
-          value: ""
+          placeholder: "en"
+
+
+        - name: auto_alert_label
+          type: label
+          label: >
+            <p>
+            When automatic alert is turned on Mycroft will perform scheduled Meteoalarm updates, e.g. every 10 minutes.
+            In case alerts for extreme or severe conditions with immediate urgency are Observed
+            Mycroft will speak the alerts headline and instructions automatically.
+            </p>
+
+        - label: Automatic alert
+          name: auto_alert
+          type: checkbox
+          value: false
+
+        - label: Update interval (minutes)
+          name: update_interval
+          type: number
+          value: 10
