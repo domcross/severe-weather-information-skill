@@ -16,7 +16,6 @@ class SevereWeatherInformation(MycroftSkill):
         MycroftSkill.__init__(self)
         self.monitoring = False
         self.update_interval = 600
-        self.language = ""
         self.severity = ""
         self.urgency = ""
         self.certainty = ""
@@ -39,13 +38,20 @@ class SevereWeatherInformation(MycroftSkill):
     def _setup(self):
         self.service = {}
         service_id = self.settings.get('service', '')
-        self.language = self.settings.get('language', 'en')
+        language = self.settings.get('language', 'en')
         if service_id and ":" not in service_id:
-            service_id = "{}:{}".format(service_id, self.language)
+            service_id = "{}:{}".format(service_id, language)
         if service_id in SWI_SERVICES.keys():
             self.service = SWI_SERVICES[service_id]
         self.log.info("service = {}".format(self.service))
-        # TODO handling of custom configuration
+        #handling of custom configuration
+        if service_id == "ZZZ:zzz":
+            custom_url = self.settings.get('custom_url', '')
+            if custom_url:
+                self.service['url'] = custom_url
+                self.service['lang'] = language
+            else:
+                self.service = {}
 
         self.severity = self.settings.get('severity', 'Extreme')
         self.urgency = self.settings.get('urgency', 'Immediate')

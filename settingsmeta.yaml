@@ -6,7 +6,7 @@ skillMetadata:
         - name: service
           type: select
           label: Service
-          options: "ARG - Argentina (es)|ARG:es;AUT - Austria (de,en)|AUT;BEL - Belgium (nl,fr)|BEL;BGH - Bulgaria (bg)|BGH:bg;BIH - Bosnia-Herzigovina (bs)|BIH:bs;BRA - Brazil (pt)|BRA:pt;BRB - Barbados (en)|BRB:en;CAN - Canada (en,fr)|CAN;CZE - Czech Republic (cs)|CZE:cs;DEU - Germany (de,en)|DEU;DNK - Denmark (en)|DNK:en;ESP - Spain (en,es)|ESP;FIN - Finland (en,fi,sv)|FIN;FRA - France (en,fr)|FRA;GBR - Great Britian (en)|GBR:en;GRC - Greece (en,el)|GRC;HRV - Croatia (en,hr)|HRV;HUN - Hungary (en,hu)|HUN;IDN - Indonesia (id)|IDN:id;ITA - Italy (en,it)|ITA;KEN - Kenya (en)|KEN:en;KWT - Kuwait (en)|KWT:en;LTU - Lithuania (en,lt)|LTU;LUX - Luxembourg (en,de,dr)|LUX;LVA - Latvia (en,lv)|LVA;MDA - Moldova (en,ro)|MDA;MEX - Mexico (es)|MEX:es;MKD - North Macedonia (en)|MKD:en;MNE - Montenegro (en,sr)|MNE;NLD - Netherlands (en,nl,pap)|NLD;NOR - Norway (en,no)|NOR;NZL - New Zealand (en)|NZL:en;PHL - Philippines (en)|PHL:en;POL - Poland (en,po)|POL;ROU - Romania (ro)|ROM:ro;RUS - Russian Federation (en,ru)|RUS;SRB - Serbia (en,sr)|SRB;SWE - Sweden (en,sv)|SWE;SVK - Slovakia (en,sk)|SVK;SVN - Slovenia (en,sl)|SVN;THA - Thailand (th)|THA:th;TZA - Tanzania, United Republic of (en)|TZA:en;USA - United States of America (en)|USA:en"
+          options: "ARG - Argentina (es)|ARG:es;AUT - Austria (de,en)|AUT;BEL - Belgium (nl,fr)|BEL;BGH - Bulgaria (bg)|BGH:bg;BIH - Bosnia-Herzigovina (bs)|BIH:bs;BRA - Brazil (pt)|BRA:pt;BRB - Barbados (en)|BRB:en;CAN - Canada (en,fr)|CAN;CZE - Czech Republic (cs)|CZE:cs;DEU - Germany (de,en)|DEU;DNK - Denmark (en)|DNK:en;ESP - Spain [meteoalarm.eu] (en,es)|ES1;ESP - Spain [aemet.es] (es)|ES2:es;FIN - Finland (en,fi,sv)|FIN;FRA - France (en,fr)|FRA;GBR - Great Britian (en)|GBR:en;GRC - Greece (en,el)|GRC;HRV - Croatia (en,hr)|HRV;HUN - Hungary (en,hu)|HUN;IDN - Indonesia (id)|IDN:id;ITA - Italy (en,it)|ITA;KEN - Kenya (en)|KEN:en;KWT - Kuwait (en)|KWT:en;LTU - Lithuania (en,lt)|LTU;LUX - Luxembourg (en,de,dr)|LUX;LVA - Latvia (en,lv)|LVA;MDA - Moldova (en,ro)|MDA;MEX - Mexico (es)|MEX:es;MKD - North Macedonia (en)|MKD:en;MNE - Montenegro (en,sr)|MNE;NLD - Netherlands (en,nl,pap)|NLD;NOR - Norway [meteoalarm.eu] (en,no)|NO1;NOR - Norway [met.no] (en,no)|NO2;NOR - Norway [nve.no] (no)|NO3:no;NZL - New Zealand (en)|NZL:en;PHL - Philippines (en)|PHL:en;POL - Poland (en,po)|POL;ROU - Romania (ro)|ROM:ro;RUS - Russian Federation (en,ru)|RUS;SRB - Serbia (en,sr)|SRB;SWE - Sweden (en,sv)|SWE;SVK - Slovakia (en,sk)|SVK;SVN - Slovenia (en,sl)|SVN;THA - Thailand (th)|THA:th;TZA - Tanzania, United Republic of (en)|TZA:en;USA - United States of America (en)|US1:en;USA - Volcano alerts [usgs.gov] (en)|US2:en;USA - Air quality [enviroflash.info] (en)|US3:en;ZZZ - Custom URL|ZZZ:zz"
           value: "USA:en"
 
         - name: language
@@ -55,7 +55,8 @@ skillMetadata:
           value: ""
           placeholder: "en"
 
-
+    - name: Automatic alerts
+      fields:
         - name: auto_alert_label
           type: label
           label: >
@@ -74,3 +75,21 @@ skillMetadata:
           name: update_interval
           type: number
           value: 10
+
+    - name: Custom configuration
+      fields:
+        - name: custom_config_label
+          type: label
+          label: >
+            <p>
+            When choosing service 'ZZZ - Custom' in Options section above then you can specify the service URL here.
+            Given URL must include http/https-prefix and point to a webservice that provides a RSS or AtomPub feed
+            where the entries are in CAP format (Common Alerting Protocol).
+            All settings in Options section (e.g. language, location, etc.) do still apply.
+            </p>
+
+        - name: custom_url
+          type: text
+          label: Custom URL
+          value: ""
+          placeholder: "http://some.service.name/feed"
