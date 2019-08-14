@@ -2,7 +2,7 @@ import feedparser
 import xmltodict
 import requests
 import collections
-from mycroft import MycroftSkill  #, intent_file_handler
+from mycroft import MycroftSkill
 from mycroft.skills.core import intent_handler, intent_file_handler
 from mycroft.audio import wait_while_speaking
 from datetime import datetime, date
@@ -25,6 +25,7 @@ class SevereWeatherInformation(MycroftSkill):
         self.location_text = ""
         self.alerts = []
         self.status = "stopped"
+        self.maximum_entries = 99
 
     def initialize(self):
         self._setup()
@@ -62,6 +63,7 @@ class SevereWeatherInformation(MycroftSkill):
 
         self.alerts = []
         self.status = "stopped"
+        self.maximum_entries = self.settings.get('maximum_entries', 99)
 
         self.log.info("severity {} urgency {} certainty {}".format(self.severity, self.urgency, self.certainty))
         if self.settings.get('auto_alert', False) and self.service:
@@ -120,12 +122,55 @@ class SevereWeatherInformation(MycroftSkill):
 
         else:
             self.log.info("no alerts!")
-            self.speak_dialog("noalerts")
+            self.speak_dialog("no.alerts")
 
         #self.speak_dialog('information.weather.severe')
 
     def auto_alert_handler(self):
-        pass
+        self.log.info("auto_alert_handler")
+        self._check_for_alerts()
+        if not self.alerts:
+            return
+        filteredalerts = []
+        for alert in self.alerts:
+            info = self.get_alert_info_by_lang(alert, language=self.service['lang'])
+            if not info:
+                continue
+            status = alert['status']
+            msgType = alert['messageType']
+            urgency = info['urgency']
+            severity = info['severity']
+            certainty = info['certainty']
+            # filter messages: only actual and severity/certainty/urgency according to skill setting
+            if status == 'Actual' and msgType in ['Alert'] and severity in "Extreme,Severe" and certainty in "Observed" and urgency in "Immediate":
+                filteredalerts.append(alert)
+
+        self.log.info("found alerts: {}".format(len(filteredalerts)))
+
+        if filteredalerts:
+            self.status = "speaking"
+            self.speak_dialog("alerts")
+            for alert in filteredalerts:
+                headline = ""
+                instruction = ""
+                info = self.get_alert_info_by_lang(alert, language=self.service['lang'])
+                if info:
+                    if "headline" in info.keys():
+                        headline = info["headline"]
+                    elif "title" in info.keys():
+                        headline = info["title"]
+                    if "instruction" in info.keys():
+                        instruction = info["instruction"]
+                    elif "summary" in info.keys():
+                        instruction = info["summary"]
+                    elif "description" in info.keys():
+                        instruction = info["description"]
+
+                wait_while_speaking()
+                if self.status == "speaking":
+                    self.speak(headline)
+                if self.status == "speaking":
+                    self.speak(instruction)
 
     def is_cap_entry(self, entry):
         k = entry.keys()
@@ -136,7 +181,6 @@ class SevereWeatherInformation(MycroftSkill):
     def get_cap_alert_link(self, links):
         caplink = ""
         for li in links:
-            #print(l)
             # cap+xml has priority, use alternate only if cap+xml link not found
             if "application/cap+xml" in li.type:
                 caplink = li.href
@@ -168,10 +212,12 @@ class SevereWeatherInformation(MycroftSkill):
                             sent=date.today(), expires=date.today(),
                             max_entries=999):
         alerts = []
-        debugcount = 0
+        count = 0
         for e in entries:
-            debugcount += 1
-            if debugcount > 99:
+            count += 1
+            # some service feeds contain the complete history of alert entries,
+            # cut them after x messages
+            if count > self.maximum_entries:
                 break
             # when entry contains CAP data do some quick filtering without
             # loading and parsing the actual CAP alert
@@ -289,7 +335,6 @@ class SevereWeatherInformation(MycroftSkill):
                 point = Point(longitude, latitude)
                 within = point.within(polygon)
                 # TODO consider EXCLUDE_POLYGON
-                # print("within = {}".format(within))
                 return within
             if areadesc and "areaDesc" in area.keys():
                 if areadesc.lower() in area["areaDesc"].lower():
@@ -313,12 +358,12 @@ class SevereWeatherInformation(MycroftSkill):
         self.status = "stopped"
         self.log.info("Meteoalert stop")
 
-    def _get_iterable(self, object):
+    def _get_iterable(self, obj):
         iterable = []
-        if type(object) is list:
-            iterable = object
-        elif type(object) is collections.OrderedDict:
-            iterable.append(object)
+        if type(obj) is list:
+            iterable = obj
+        elif type(obj) is collections.OrderedDict:
+            iterable.append(obj)
         # print("iterable {}".format(iterable))
         return iterable
 
