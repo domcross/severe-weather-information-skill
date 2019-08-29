@@ -11,6 +11,7 @@ from mycroft.configuration import ConfigurationManager as config
 
 from .swi_resources import SWI_SERVICES
 
+
 class SevereWeatherInformation(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
@@ -30,7 +31,7 @@ class SevereWeatherInformation(MycroftSkill):
     def initialize(self):
         self._setup()
         self.settings.set_changed_callback(self.on_websettings_changed)
-        #self.log.info("config: {}".format(ConfigurationManager.get()))
+        # self.log.info("config: {}".format(ConfigurationManager.get()))
 
     def on_websettings_changed(self):
         self.log.debug("websettings changed")
@@ -45,8 +46,8 @@ class SevereWeatherInformation(MycroftSkill):
         if service_id in SWI_SERVICES.keys():
             self.service = SWI_SERVICES[service_id]
         self.log.info("service = {}".format(self.service))
-        #handling of custom configuration
-        if service_id == "ZZZ:zzz":
+        # handling of custom configuration
+        if service_id == "ZZZ:zz":
             custom_url = self.settings.get('custom_url', '')
             if custom_url:
                 self.service['url'] = custom_url
@@ -74,7 +75,7 @@ class SevereWeatherInformation(MycroftSkill):
         else:
             self.monitoring = False
             self.cancel_scheduled_event('SevereWeatherInformation')
-            self.log.info("auto_alert off")
+            self.log.info("auto_alert is off")
 
     def _check_for_alerts(self):
         self.alerts = {}
@@ -82,7 +83,7 @@ class SevereWeatherInformation(MycroftSkill):
         self.log.info("header: {}".format(self.service['hdr_feed']))
         feed = feedparser.parse(self.service['url'], request_headers=self.service['hdr_feed'])
         #self.log.info(feed)
-        #self.log.info("CAP v{}".format(self.get_cap_version(feed)))
+        #self.log.info("CAP version {}".format(self.get_cap_version(feed)))
         self.alerts = self.get_filtered_alerts(feed.entries, max_entries=5)
 
     @intent_file_handler('information.weather.severe.intent')
@@ -118,7 +119,7 @@ class SevereWeatherInformation(MycroftSkill):
                         if self.status == "speaking":
                             self.speak(description)
                 else:
-                    self.log.info("???")
+                    self.log.info("no info!?!")
 
         else:
             self.log.info("no alerts!")
@@ -141,7 +142,7 @@ class SevereWeatherInformation(MycroftSkill):
             urgency = info['urgency']
             severity = info['severity']
             certainty = info['certainty']
-            # filter messages: only actual and severity/certainty/urgency according to skill setting
+            #filter messages: only actual and severity/certainty/urgency according to skill setting
             if status == 'Actual' and msgType in ['Alert'] and severity in "Extreme,Severe" and certainty in "Observed" and urgency in "Immediate":
                 filteredalerts.append(alert)
 

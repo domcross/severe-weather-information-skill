@@ -1,12 +1,13 @@
 name: Severe Weather Information
 skillMetadata:
   sections:
+
     - name: Options
       fields:
         - name: service
           type: select
           label: Service
-          options: "ARG - Argentina (es)|ARG:es;AUT - Austria (de,en)|AUT;BEL - Belgium (nl,fr)|BEL;BGH - Bulgaria (bg)|BGH:bg;BIH - Bosnia-Herzigovina (bs)|BIH:bs;BRA - Brazil (pt)|BRA:pt;BRB - Barbados (en)|BRB:en;CAN - Canada (en,fr)|CAN;CZE - Czech Republic (cs)|CZE:cs;DEU - Germany (de,en)|DEU;DNK - Denmark (en)|DNK:en;ESP - Spain [meteoalarm.eu] (en,es)|ES1;ESP - Spain [aemet.es] (es)|ES2:es;FIN - Finland (en,fi,sv)|FIN;FRA - France (en,fr)|FRA;GBR - Great Britian (en)|GBR:en;GRC - Greece (en,el)|GRC;HRV - Croatia (en,hr)|HRV;HUN - Hungary (en,hu)|HUN;IDN - Indonesia (id)|IDN:id;ITA - Italy (en,it)|ITA;KEN - Kenya (en)|KEN:en;KWT - Kuwait (en)|KWT:en;LTU - Lithuania (en,lt)|LTU;LUX - Luxembourg (en,de,dr)|LUX;LVA - Latvia (en,lv)|LVA;MDA - Moldova (en,ro)|MDA;MEX - Mexico (es)|MEX:es;MKD - North Macedonia (en)|MKD:en;MNE - Montenegro (en,sr)|MNE;NLD - Netherlands (en,nl,pap)|NLD;NOR - Norway [meteoalarm.eu] (en,no)|NO1;NOR - Norway [met.no] (en,no)|NO2;NOR - Norway [nve.no] (no)|NO3:no;NZL - New Zealand (en)|NZL:en;PHL - Philippines (en)|PHL:en;POL - Poland (en,po)|POL;ROU - Romania (ro)|ROM:ro;RUS - Russian Federation (en,ru)|RUS;SRB - Serbia (en,sr)|SRB;SWE - Sweden (en,sv)|SWE;SVK - Slovakia (en,sk)|SVK;SVN - Slovenia (en,sl)|SVN;THA - Thailand (th)|THA:th;TZA - Tanzania, United Republic of (en)|TZA:en;USA - United States of America (en)|US1:en;USA - Volcano alerts [usgs.gov] (en)|US2:en;USA - Air quality [enviroflash.info] (en)|US3:en;ZZZ - Custom URL|ZZZ:zz"
+          options: "Austria (de,en)|AUT;Argentina (es)|ARG:es;Belgium (nl,fr)|BEL;Canada (en,fr)|CAN;Denmark (en)|DNK:en;Germany (de,en)|DEU;Finland (en,fi,sv)|FIN;France (en,fr)|FRA;Great Britian (en)|GBR:en;Greece (en,el)|GRC;Italy (en,it)|ITA;Spain(en,es)|ES1;Sweden (en,sv)|SWE;U.S. of America (en)|US1:en;ZZZ - Custom configuration|ZZZ:zz"
           value: "US1:en"
 
         - name: language
@@ -38,7 +39,7 @@ skillMetadata:
           label: >
             <p>
             Filtering by location is highly recommended as weather services might provide lots of warnings for areas far away from your location.
-            "Mycroft device" will use longitude/latitude from the device's configuration.
+            "Mycroft device" will use longitude/latitude from the device configuration.
             "Area description" is very often the name of a city/county/region - don't forget to enter description in field "Location (description)"
             "Geo-Code" is dependant on the service, e.g. UGC, Emma-Id or NUTS3 - enter the actual code-value in field "Location (description)" without the Geo-Code name.
             </p>
@@ -51,18 +52,16 @@ skillMetadata:
 
         - name: location_text
           type: text
-          label: Location (Value)
+          label: Location (description)
           value: ""
           placeholder: "en"
 
-    - name: Automatic alerts
-      fields:
         - name: auto_alert_label
           type: label
           label: >
             <p>
-            When automatic alert is turned on Mycroft will perform scheduled Meteoalarm updates, e.g. every 10 minutes.
-            In case alerts for extreme or severe conditions with immediate urgency are Observed
+            When automatic alert is turned on Mycroft will perform scheduled updates, e.g. every 10 minutes.
+            In case alerts for extreme or severe conditions with immediate urgency are observed
             Mycroft will speak the alerts headline and instructions automatically.
             </p>
 
@@ -76,8 +75,6 @@ skillMetadata:
           type: number
           value: 10
 
-    - name: Custom configuration
-      fields:
         - name: custom_config_label
           type: label
           label: >
