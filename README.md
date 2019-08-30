@@ -1,4 +1,4 @@
-# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/robot.svg" card_color="#40DBB0" width="50" height="50" style="vertical-align:bottom"/> Severe Weather Information
+# <img src="https://raw.githack.com/FortAwesome/Font-Awesome/master/svgs/solid/bolt.svg" card_color="#40DBB0" width="50" height="50" style="vertical-align:bottom"/> Severe Weather Information
 Checks your national weather service and notifies you when there are alerts for your region
 
 ## About

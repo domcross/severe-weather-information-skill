@@ -1,0 +1,105 @@
+name: Severe Weather Information
+skillMetadata:
+  sections:
+
+    - name: Options
+      fields:
+        - name: service
+          type: select
+          label: Service
+          options: "Austria (de,en)|AUT;Argentina (es)|ARG:es;Belgium (nl,fr)|BEL;Bosnia-Herzigovina (bs)|BIH:bs;Brazil (pt)|BRA:pt;Bulgaria (bg)|BGH:bg;Canada (en,fr)|CAN;Croatia (en,hr)|HRV;Czech Republic (cs)|CZE:cs;Denmark (en)|DNK:en;Germany (de,en)|DEU;Spain(en,es)|ES1;Finland (en,fi,sv)|FIN;France (en,fr)|FRA;Great Britian (en)|GBR:en;Greece (en,el)|GRC;Hungary (en,hu)|HUN;Indonesia (id)|IDN:id;Italy (en,it)|ITA;Kenya (en)|KEN:en;Kuwait (en)|KWT:en;Latvia (en,lv)|LVA;Lithuania (en,lt)|LTU;Luxembourg (en,de,dr)|LUX;Mexico (es)|MEX:es;Moldova (en,ro)|MDA;North Macedonia (en)|MKD:en;Montenegro (en,sr)|MNE;Netherlands (en,nl,pap)|NLD;Norway (en,no)|NO1;New Zealand (en)|NZL:en;Philippines (en)|PHL:en;Poland (en,po)|POL;Romania (ro)|ROM:ro;Russian Federation (en,ru)|RUS;Serbia (en,sr)|SRB;Sweden (en,sv)|SWE;Slovakia (en,sk)|SVK;Slovenia (en,sl)|SVN;Thailand (th)|THA:th;Tanzania(en)|TZA:en;U.S. of America (en)|US1:en"
+          value: "US1:en"
+
+        - name: language
+          type: text
+          label: Language
+          value: "en"
+          placeholder: "en"
+
+        - name: urgency
+          type: select
+          label: Urgency
+          options: "Immediate|Immediate;Expected|Immediate,Expected;Future|Immediate,Expected,Future"
+          value: "Immediate"
+
+        - name: severity
+          type: select
+          label: Severity
+          options: "Extreme|Extreme;Severe|Extreme,Severe;Moderate|Extreme,Severe,Moderate;Minor|Extreme,Severe,Moderate,Minor"
+          value: "Extreme"
+
+        - name: certainty
+          type: select
+          label: Certainty
+          options: "Observed|Observed;Likely|Observed,Likely;Possible|Observed,Likely,Possible"
+          value: "Observed"
+
+        - name: location_label
+          type: label
+          label: >
+            <p>
+            Filtering by location is highly recommended as weather services might provide lots of warnings for areas far away from your location.
+            "Mycroft device" will use longitude/latitude from the device's configuration.
+            "Area description" is very often the name of a city/county/region - don't forget to enter description in field "Location (description)"
+            "Geo-Code" is dependant on the service, e.g. UGC, Emma-Id or NUTS3 - enter the actual code-value in field "Location (description)" without the Geo-Code name.
+            </p>
+
+        - name: location_filter
+          type: select
+          label: Location (filter)
+          options: "Mycroft device|geoloc;Area description|areadesc;Geo-Code|geocode;None|none"
+          value: "geoloc"
+
+        - name: location_text
+          type: text
+          label: Location (Value)
+          value: ""
+          placeholder: "en"
+
+        - name: auto_alert_label
+          type: label
+          label: >
+            <p>
+            When automatic alert is turned on Mycroft will perform scheduled Meteoalarm updates, e.g. every 10 minutes.
+            In case alerts for extreme or severe conditions with immediate urgency are Observed
+            Mycroft will speak the alerts headline and instructions automatically.
+            </p>
+
+        - label: Automatic alert
+          name: auto_alert
+          type: checkbox
+          value: false
+
+        - label: Update interval (minutes)
+          name: update_interval
+          type: number
+          value: 10
+
+        - name: custom_config_label
+          type: label
+          label: >
+            <p>
+            When choosing service 'ZZZ - Custom' in Options section above then you can specify the service URL here.
+            Given URL must include http/https-prefix and point to a webservice that provides a RSS or AtomPub feed
+            where the entries are in CAP format (Common Alerting Protocol).
+            All settings in Options section (e.g. language, location, etc.) do still apply.
+            </p>
+
+        - name: custom_url
+          type: text
+          label: Custom URL
+          value: ""
+          placeholder: "http://some.service.name/feed"
+
+        - name: max_entries_label
+          type: label
+          label: >
+            <p>
+            Some services provides the complete history of alerts in their CAP feed.
+            With following setting you can control the maximum numbers of entries that will be parsed for the CAP feed.
+            </p>
+
+        - label: Maximum entries
+          name: maximum_entries
+          type: number
+          value: 99

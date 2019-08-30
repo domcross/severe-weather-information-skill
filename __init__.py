@@ -83,7 +83,7 @@ class SevereWeatherInformation(MycroftSkill):
         self.log.info("header: {}".format(self.service['hdr_feed']))
         feed = feedparser.parse(self.service['url'], request_headers=self.service['hdr_feed'])
         #self.log.info(feed)
-        #self.log.info("CAP version {}".format(self.get_cap_version(feed)))
+        #self.log.info("CAP v{}".format(self.get_cap_version(feed)))
         self.alerts = self.get_filtered_alerts(feed.entries, max_entries=5)
 
     @intent_file_handler('information.weather.severe.intent')
