@@ -83,6 +83,8 @@ skillMetadata:
             Given URL must include http/https-prefix and point to a webservice that provides a RSS or AtomPub feed
             where the entries are in CAP format (Common Alerting Protocol).
             All settings in Options section (e.g. language, location, etc.) do still apply.
+
+            Go [here](https://github.com/domcross/severe-weather-information-skill/blob/master/SERVICES.md) for a list of additinal services.
             </p>
 
         - name: custom_url
