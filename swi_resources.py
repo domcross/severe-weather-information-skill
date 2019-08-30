@@ -50,7 +50,8 @@ SWI_SERVICES = {
     #CYP Cyprus?
 
     # CZE Czech Republic
-    'CZE:cs': {'country': 'CZE', 'lang': 'cs', 'title': 'CZE - Czech Republic (cs)', 'url': 'http://portal.chmi.cz/files/portal/docs/meteo/om/bulletiny/XOCZ53_OKPR', 'hdr_feed': '', 'hdr_atom': ''},
+    'CZE:cs': {'country': 'CZE', 'lang': 'cs', 'title': 'CZE - Czech Republic (cs)', 'url': 'http://meteoalarm.eu/ATOM/CZ.xml', 'hdr_feed': '', 'hdr_atom': ''},
+    'CZE:en': {'country': 'CZE', 'lang': 'en', 'title': 'CZE - Czech Republic (en)', 'url': 'http://meteoalarm.eu/ATOM/CZ.xml', 'hdr_feed': '', 'hdr_atom': ''},
 
     # DEU Germany
     'DEU:de': {'country': 'DEU', 'lang': 'de', 'title': 'DEU - Germany (de)', 'url': 'https://www.dwd.de/DWD/warnungen/cap-feed/de/atom.xml', 'hdr_feed': {"User-agent":"Mozilla/5.0/2.19.1 (Linux x86_64)"}, 'hdr_atom': {"User-agent":"Mozilla/5.0/2.19.1 (Linux x86_64)"}},

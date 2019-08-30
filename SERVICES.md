@@ -9,13 +9,13 @@ Additional services
 |Czech Republic |http://meteoalarm.eu/ATOM/CZ.xml|cs,en|
 |Hungary|http://meteoalarm.eu/ATOM/HU.xml|en,hu|
 |Indonesia|https://signature.bmkg.go.id/alert/public/rss.xml|id|
-|Kenia|ttp://www.meteo.go.ke/cap/en/alerts/rss.xml|en|
+|Kenia|http://www.meteo.go.ke/cap/en/alerts/rss.xml|en|
 |Kuwait|http://www.met.gov.kw/rss_eng/kuwait_cap.xml|en|
 |Latvia|http://meteoalarm.eu/ATOM/LV.xml|en,lv|
 |Lithuania|http://meteoalarm.eu/ATOM/LT.xml|en,lt|
 |Luxembourg|http://meteoalarm.eu/ATOM/LU.xml|de,en,fr|
 |Mexico|https://correo1.conagua.gob.mx/feedsmn/feedalert.aspx|es|
-|Moldova|ttp://meteoalarm.eu/ATOM/MD.xml|en,ro|
+|Moldova|http://meteoalarm.eu/ATOM/MD.xml|en,ro|
 |Montenegro|http://meteoalarm.eu/ATOM/ME.xml|en,sr|
 |Netherlands|http://meteoalarm.eu/ATOM/NL.xml|en,nl|
 |New Zealand (quake)|http://api.geonet.org.nz/cap/1.2/GPA1.0/feed/atom1.0/quake|en|
