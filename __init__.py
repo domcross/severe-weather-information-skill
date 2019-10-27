@@ -45,7 +45,7 @@ class SevereWeatherInformation(MycroftSkill):
 
     def initialize(self):
         self._setup()
-        self.settings.set_changed_callback(self.on_websettings_changed)
+        self.settings_change_callback =self.on_websettings_changed
         # self.log.info("config: {}".format(ConfigurationManager.get()))
 
     def on_websettings_changed(self):

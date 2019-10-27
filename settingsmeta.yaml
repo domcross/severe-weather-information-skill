@@ -1,7 +1,6 @@
 name: Severe Weather Information
 skillMetadata:
   sections:
-
     - name: Options
       fields:
         - name: service
@@ -9,31 +8,26 @@ skillMetadata:
           label: Service
           options: "Austria (de,en)|AUT;Argentina (es)|ARG:es;Belgium (nl,fr)|BEL;Canada (en,fr)|CAN;Denmark (en)|DNK:en;Germany (de,en)|DEU;Finland (en,fi,sv)|FIN;France (en,fr)|FRA;Great Britian (en)|GBR:en;Greece (en,el)|GRC;Italy (en,it)|ITA;Spain(en,es)|ES1;Sweden (en,sv)|SWE;U.S. of America (en)|US1:en;ZZZ - Custom configuration|ZZZ:zz"
           value: "US1:en"
-
         - name: language
           type: text
           label: Language
           value: "en"
           placeholder: "en"
-
         - name: urgency
           type: select
           label: Urgency
           options: "Immediate|Immediate;Expected|Immediate,Expected;Future|Immediate,Expected,Future"
           value: "Immediate"
-
         - name: severity
           type: select
           label: Severity
           options: "Extreme|Extreme;Severe|Extreme,Severe;Moderate|Extreme,Severe,Moderate;Minor|Extreme,Severe,Moderate,Minor"
           value: "Extreme"
-
         - name: certainty
           type: select
           label: Certainty
           options: "Observed|Observed;Likely|Observed,Likely;Possible|Observed,Likely,Possible"
           value: "Observed"
-
         - name: location_label
           type: label
           label: >
@@ -43,19 +37,16 @@ skillMetadata:
             "Area description" is very often the name of a city/county/region - don't forget to enter description in field "Location (description)"
             "Geo-Code" is dependant on the service, e.g. UGC, Emma-Id or NUTS3 - enter the actual code-value in field "Location (description)" without the Geo-Code name.
             </p>
-
         - name: location_filter
           type: select
           label: Location (filter)
           options: "Mycroft device|geoloc;Area description|areadesc;Geo-Code|geocode;None|none"
           value: "geoloc"
-
         - name: location_text
           type: text
           label: Location (description)
           value: ""
           placeholder: "en"
-
         - name: auto_alert_label
           type: label
           label: >
@@ -64,17 +55,14 @@ skillMetadata:
             In case alerts for extreme or severe conditions with immediate urgency are observed
             Mycroft will speak the alerts headline and instructions automatically.
             </p>
-
         - label: Automatic alert
           name: auto_alert
           type: checkbox
-          value: false
-
+          value: "false"
         - label: Update interval (minutes)
           name: update_interval
           type: number
           value: 10
-
         - name: custom_config_label
           type: label
           label: >
@@ -86,13 +74,11 @@ skillMetadata:
 
             Go [here](https://github.com/domcross/severe-weather-information-skill/blob/master/SERVICES.md) for a list of additinal services.
             </p>
-
         - name: custom_url
           type: text
           label: Custom URL
           value: ""
           placeholder: "http://some.service.name/feed"
-
         - name: max_entries_label
           type: label
           label: >
@@ -100,7 +86,6 @@ skillMetadata:
             Some services provides the complete history of alerts in their CAP feed.
             With following setting you can control the maximum numbers of entries that will be parsed for the CAP feed.
             </p>
-
         - label: Maximum entries
           name: maximum_entries
           type: number
