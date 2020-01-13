@@ -85,7 +85,7 @@ class SevereWeatherInformation(MycroftSkill):
         if self.settings.get('auto_alert', False) and self.service:
             self.monitoring = True
             self.update_interval = self.settings.get("update_interval", 10) * 60
-            self.schedule_repeating_event(handler=self.auto_alert_handler, when=datetime.now(), frequency=self.update_interval, name='Meteoalert')
+            self.schedule_repeating_event(handler=self.auto_alert_handler, when=datetime.now(), frequency=self.update_interval, name='SevereWeather')
             self.log.info("auto_alert on, update_interval {} seconds".format(self.update_interval))
         else:
             self.monitoring = False
@@ -339,8 +339,8 @@ class SevereWeatherInformation(MycroftSkill):
                         geocodename="", geocodevalue=""):
         infoareas = self._get_iterable(info["area"])
         for area in infoareas:
-            # print("{} {}".format(type(area),area))
-            if longitude and latitude and "polygon" in area.keys():
+            self.log.debug("type: {} area:{}".format(type(area),area))
+            if longitude and latitude and "polygon" in area.keys() and area["polygon"]:
                 points = []
                 for lola in area["polygon"].split(" "):
                     lonlat = lola.split(",")
@@ -352,18 +352,18 @@ class SevereWeatherInformation(MycroftSkill):
                 within = point.within(polygon)
                 # TODO consider EXCLUDE_POLYGON
                 return within
-            if areadesc and "areaDesc" in area.keys():
+            if areadesc and "areaDesc" in area.keys() and area["areaDesc"]:
                 if areadesc.lower() in area["areaDesc"].lower():
                     # TODO: fuzzy matching?
                     return True
-            if geocodename and geocodevalue and "geocode" in area.keys():
+            if geocodename and geocodevalue and "geocode" in area.keys() and area["geocode"]:
                 geocodes = self._get_iterable(area["geocode"])
                 for gc in geocodes:
                     if "valueName" in gc and "value" in gc \
                         and geocodename.lower() in gc["valueName"].lower() \
                         and geocodevalue.lower() in gc["value"].lower():
                         return True
-            if geocodevalue and "geocode" in area.keys():
+            if geocodevalue and "geocode" in area.keys() and area["geocode"]:
                 geocodes = self._get_iterable(area["geocode"])
                 for gc in geocodes:
                     if "value" in gc and geocodevalue.lower() in gc["value"].lower():
@@ -372,7 +372,7 @@ class SevereWeatherInformation(MycroftSkill):
 
     def stop(self):
         self.status = "stopped"
-        self.log.info("Meteoalert stop")
+        self.log.info("SevereWeatherInformation skill stop")
 
     def _get_iterable(self, obj):
         iterable = []
