@@ -110,7 +110,9 @@ class SevereWeatherInformation(MycroftSkill):
                 headline = ""
                 description = ""
                 info = self.get_alert_info_by_lang(alert, language=self.service['lang'])
+                self.log.debug(">Alert: {}".format(alert))
                 if info:
+                    self.log.debug(">Info : {}".format(info))
                     if "headline" in info.keys():
                         #self.log.info(info["headline"])
                         headline = info["headline"]
@@ -123,6 +125,7 @@ class SevereWeatherInformation(MycroftSkill):
                     elif "description" in info.keys():
                         #self.log.info(info["description"])
                         description = info["description"]
+                    self.log.debug("first message: {} headline: {} description: {}".format(first_message, headline, description))
                     if first_message and headline and description:
                         self.speak_dialog("alerts")
                         first_message = False
@@ -333,6 +336,7 @@ class SevereWeatherInformation(MycroftSkill):
                 return alert["info"]
             else:  # only one info-item found, use it regardless of language?
                 return alert["info"]
+        self.log.warning("get_alert_info_by_lang returns None!")
         return None
 
     def in_geo_location(self, info, longitude=None, latitude=None, areadesc="",
