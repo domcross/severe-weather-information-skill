@@ -17,12 +17,13 @@ import feedparser
 import xmltodict
 import requests
 import collections
+import re
 from mycroft import MycroftSkill
 from mycroft.skills.core import intent_handler, intent_file_handler
 from mycroft.audio import wait_while_speaking
 from datetime import datetime, date
 from shapely.geometry import Point, Polygon
-from mycroft.configuration import ConfigurationManager as config
+from mycroft.configuration import Configuration as config
 
 from .swi_resources import SWI_SERVICES
 
@@ -45,10 +46,10 @@ class SevereWeatherInformation(MycroftSkill):
 
     def initialize(self):
         self._setup()
-        self.settings_change_callback =self.on_websettings_changed
+        self.settings_change_callback =self.on_websettings_change
         # self.log.info("config: {}".format(ConfigurationManager.get()))
 
-    def on_websettings_changed(self):
+    def on_websettings_change(self):
         self.log.debug("websettings changed")
         self._setup()
 
@@ -85,7 +86,7 @@ class SevereWeatherInformation(MycroftSkill):
         if self.settings.get('auto_alert', False) and self.service:
             self.monitoring = True
             self.update_interval = self.settings.get("update_interval", 10) * 60
-            self.schedule_repeating_event(handler=self.auto_alert_handler, when=datetime.now(), frequency=self.update_interval, name='SevereWeather')
+            self.schedule_repeating_event(handler=self.auto_alert_handler, when=datetime.now(), frequency=self.update_interval, name='SevereWeatherInformation')
             self.log.info("auto_alert on, update_interval {} seconds".format(self.update_interval))
         else:
             self.monitoring = False
@@ -131,7 +132,11 @@ class SevereWeatherInformation(MycroftSkill):
                         first_message = False
                         self.status = "speaking"
                     if headline and description:
-                        wait_while_speaking()
+                        # remove unwanted characters before speaking
+                        unwanted = "\*|\.\.\."
+                        headline = re.sub(unwanted, " ", headline)
+                        description = re.sub(unwanted, " ", description)    
+                        #wait_while_speaking()
                         if self.status == "speaking":
                             self.speak(headline)
                         if self.status == "speaking":
@@ -143,6 +148,7 @@ class SevereWeatherInformation(MycroftSkill):
             self.log.info("no alerts!")
             self.speak_dialog("no.alerts")
 
+        self.status = "stopped"
         #self.speak_dialog('information.weather.severe')
 
     def auto_alert_handler(self):
