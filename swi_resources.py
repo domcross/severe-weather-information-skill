@@ -2,7 +2,7 @@
 List of service for Severe Weather Information skill
 
 taken from following resources as of 2019-08-13:
-https://severe.worldweather.wmo.int/v2/sources.html
+https://severeweather.wmo.int/v2/sources.html
 https://alerting.worldweather.org/atom.xml
 http://meteoalarm.eu/ATOM/root.xml
 

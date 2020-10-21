@@ -1,0 +1,5 @@
+{
+    "intent_type": "information.weather.severe.intent",
+    "utterance": "are there weather alerts",
+    "expected_dialog": "no.alerts"
+}

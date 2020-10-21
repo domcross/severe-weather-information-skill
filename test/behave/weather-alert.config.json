@@ -1,0 +1,13 @@
+{
+    "lang": "en-us",
+    "location": {
+        "nowhere": {
+          "location": {
+            "coordinate": {
+              "latitude": 0.0,
+              "longitude": 0.0
+            }
+          }
+        }
+    }
+}

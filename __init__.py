@@ -55,7 +55,7 @@ class SevereWeatherInformation(MycroftSkill):
 
     def _setup(self):
         self.service = {}
-        service_id = self.settings.get('service', '')
+        service_id = self.settings.get('service', 'US1:en')
         language = self.settings.get('language', 'en')
         if service_id and ":" not in service_id:
             service_id = "{}:{}".format(service_id, language)
@@ -75,7 +75,7 @@ class SevereWeatherInformation(MycroftSkill):
         self.urgency = self.settings.get('urgency', 'Immediate')
         self.certainty = self.settings.get('certainty', 'Observed')
 
-        self.location_filter = self.settings.get('location_filter', '')
+        self.location_filter = self.settings.get('location_filter', 'geoloc')
         self.location_text = self.settings.get('location_text', '')
 
         self.alerts = []
@@ -104,6 +104,7 @@ class SevereWeatherInformation(MycroftSkill):
 
     @intent_file_handler('information.weather.severe.intent')
     def handle_information_weather_severe(self, message):
+        self.log.debug(message.data.get('utterance'))
         self._check_for_alerts()
         if self.alerts:
             first_message = True
