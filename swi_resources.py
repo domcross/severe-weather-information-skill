@@ -164,10 +164,6 @@ SWI_SERVICES = {
     # ROU Romania
     'ROU:ro': {'country': 'ROU', 'lang': 'ro', 'title': 'ROU - Romania (ro)', 'url': 'http://meteoalarm.eu/ATOM/RO.xml', 'hdr_feed': '', 'hdr_atom': ''},
 
-    # RUS Russian Federation
-    'RUS:en': {'country': 'RUS', 'lang': 'en', 'title': 'RUS - Russian Federation (en)', 'url': 'https://meteoinfo.ru/hmc-output/cap/cap-feed/en/atom.xml', 'hdr_feed': '', 'hdr_atom': ''},
-    'RUS:ru': {'country': 'RUS', 'lang': 'en', 'title': 'RUS - Russian Federation (ru)', 'url': 'https://meteoinfo.ru/hmc-output/cap/cap-feed/ru/atom.xml', 'hdr_feed': '', 'hdr_atom': ''},
-
     #SRB Serbia
     'SRB:en': {'country': 'SRB', 'lang': 'en', 'title': 'SRB - Serbia (en)', 'url': 'http://meteoalarm.eu/ATOM/RS.xml', 'hdr_feed': '', 'hdr_atom': ''},
     'SRB:sr': {'country': 'SRB', 'lang': 'sr', 'title': 'SRB - Serbia (sr)', 'url': 'http://meteoalarm.eu/ATOM/RS.xml', 'hdr_feed': '', 'hdr_atom': ''},
