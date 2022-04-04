@@ -23,7 +23,6 @@ Additional services
 |Philippines|https://publicalert.pagasa.dost.gov.ph/feeds/|en|
 |Poland|http://meteoalarm.eu/ATOM/PL.xml|en,pl|
 |Romania|http://meteoalarm.eu/ATOM/RO.xml|ro|
-|Russian|https://meteoinfo.ru/hmc-output/cap/cap-feed/ru/atom.xml|ru|
 |Serbia|http://meteoalarm.eu/ATOM/RS.xml|en,sr|
 |Slovenia|http://meteoalarm.eu/ATOM/SI.xml|en,sl|
 |Thailand|https://www.tmd.go.th/feeds/CAPfeeds.php|th|
